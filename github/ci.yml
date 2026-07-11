@@ -24,11 +24,11 @@ on:
         uses: actions/setup-node@v4
         with:
             node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+            cache: 'npm'
       
       - name: Install dependencies
         run: npm ci
 
       - name: Deploy to Render
-        if github.ref == 'refs/heads/main':
+        if: github.ref == 'refs/heads/main'
         run: curl -x POST ${{ secrets.RENDER_DEPLOY_HOOK }}
